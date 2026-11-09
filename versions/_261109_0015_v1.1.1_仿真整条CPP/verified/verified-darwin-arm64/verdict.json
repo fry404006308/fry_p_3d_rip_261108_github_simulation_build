@@ -1,0 +1,90 @@
+{
+ "schema_str": "fry-gh-verdict/1",
+ "product_str": "sim",
+ "version_str": "1.1.1",
+ "version_dir_str": "_261109_0015_v1.1.1_仿真整条CPP",
+ "target_str": "darwin-arm64",
+ "host_target_str": "darwin-arm64",
+ "machine_dict": {
+  "platform_str": "macOS-15.8.2-arm64-arm-64bit",
+  "machine_str": "arm64",
+  "python_str": "3.11.9",
+  "runner_str": "GitHub Actions 1000000016",
+  "image_str": "macos15 20261104.0514.1",
+  "macos_str": "15.8.2"
+ },
+ "started_at_str": "2026-11-09T08:21:42+0000",
+ "algorithm_fingerprint_str": "4efa33dddddcd03237d9d3ee2067bf0a8b1a9112933bf4a99241b30eee4a4a0a",
+ "checks_list": [
+  {
+   "key_str": "平台闸",
+   "ok_bool": true,
+   "detail_str": "本机 darwin-arm64 ｜ 要验 darwin-arm64"
+  },
+  {
+   "key_str": "输入闸 sha256",
+   "ok_bool": true,
+   "detail_str": "5 个输入与 manifest 一致"
+  },
+  {
+   "key_str": "run_on_target.sh",
+   "ok_bool": true,
+   "detail_str": "rc=0（冒烟八条：导出面 / rpath / 自报指纹 / golden 逐位 1 线程 + 多线程 / C / Python 示例）"
+  },
+  {
+   "key_str": "冒烟 a.产物齐全",
+   "ok_bool": true,
+   "detail_str": "fry_sim.dylib、fry-sim-cli、FrySimDemoC"
+  },
+  {
+   "key_str": "冒烟 b.导出面==头文件",
+   "ok_bool": true,
+   "detail_str": "导出 16 个 / 头文件 14 个"
+  },
+  {
+   "key_str": "冒烟 c.rpath只认同目录",
+   "ok_bool": true,
+   "detail_str": "依赖：/usr/lib/libSystem.B.dylib ｜ 最低系统 macOS 13.0"
+  },
+  {
+   "key_str": "冒烟 d.ctypes自报",
+   "ok_bool": true,
+   "detail_str": "版本 1.1.1 ｜ 指纹 4efa33dddddcd032 ｜ api 2 ｜ macos-arm64 | clang 21.1.0  | -ffp-contract=off -fno-fast-math, static C++ runtime"
+  },
+  {
+   "key_str": "冒烟 e.cli version",
+   "ok_bool": true,
+   "detail_str": "fry_sim SDK 1.1.1"
+  },
+  {
+   "key_str": "冒烟 f.golden逐位",
+   "ok_bool": true,
+   "detail_str": "✓ selftest: 18 次运行，9 个用例，失败 0 ｜ 指纹 4efa33dddddcd032 ｜ macos-arm64 | clang 21.1.0  | -ffp-contract=off -fno-fast-math, static C++ runtime"
+  },
+  {
+   "key_str": "冒烟 g.纯C示例",
+   "ok_bool": true,
+   "detail_str": "✓ gaussian3d 脉冲 → [0 0.25 0.5 0.25 0]"
+  },
+  {
+   "key_str": "冒烟 h.Python示例",
+   "ok_bool": true,
+   "detail_str": "✓ gaussian3d 脉冲 → [0.0, 0.25, 0.5, 0.25, 0.0]"
+  },
+  {
+   "key_str": "冒烟条数",
+   "ok_bool": true,
+   "detail_str": "8 / 8"
+  },
+  {
+   "key_str": "交付件",
+   "ok_bool": true,
+   "detail_str": "fry_sim_sdk-1.1.1-darwin-arm64.zip"
+  }
+ ],
+ "ok_bool": true,
+ "seconds_float": 2.2,
+ "deliverable_dict": {
+  "fry_sim_sdk-1.1.1-darwin-arm64.zip": "b1bab7a872e950313eac5b6396d7d00c87a1cc261e0513072330afbdf69f4b37"
+ }
+}

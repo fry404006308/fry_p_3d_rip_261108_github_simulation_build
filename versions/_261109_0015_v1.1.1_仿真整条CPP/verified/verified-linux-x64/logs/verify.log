@@ -1,0 +1,19 @@
+
+$ sh run_on_target.sh
+  ⓪ 指纹闸（验收包不带源码）：prebuilt_info.json 的算法指纹 = cpp.lock.json = 4efa33dddddcd032
+========================================================================================
+仿真 SDK 出包 ｜ 版本 1.1.1 ｜ 平台 linux-x64 ｜ 载荷指纹 4efa33dddddcd032
+========================================================================================
+  ① 不编译：用 /home/runner/work/fry_p_3d_rip_261108_github_simulation_build/fry_p_3d_rip_261108_github_simulation_build/_ci_out/_work_linux-x64/fry_sim_target_kit-1.1.1-linux-x64/prebuilt（zig 0.16.0 交叉编译（宿主 win32-x64）-target x86_64-linux-gnu.2.28）
+  ② 冒烟
+  ✓ a.产物齐全                 fry_sim.so、fry-sim-cli、FrySimDemoC
+  ✓ b.导出面==头文件             导出 14 个 / 头文件 14 个
+  ✓ c.rpath只认同目录           依赖：ld-linux-x86-64.so.2、libc.so.6、libdl.so.2、libm.so.6、libpthread.so.0 ｜ 最低系统 glibc 2.18
+  ✓ d.ctypes自报             版本 1.1.1 ｜ 指纹 4efa33dddddcd032 ｜ api 2 ｜ linux-x64 | clang 21.1.0  | -ffp-contract=off -fno-fast-math, static C++ runtime
+  ✓ e.cli version          fry_sim SDK 1.1.1
+  ✓ f.golden逐位             ✓ selftest: 18 次运行，9 个用例，失败 0 ｜ 指纹 4efa33dddddcd032 ｜ linux-x64 | clang 21.1.0  | -ffp-contract=off -fno-fast-math, static C++ runtime
+  ✓ g.纯C示例                 ✓ gaussian3d 脉冲 → [0 0.25 0.5 0.25 0]
+  ✓ h.Python示例             ✓ gaussian3d 脉冲 → [0.0, 0.25, 0.5, 0.25, 0.0]
+  ③ 打包 → out/package/fry_sim_sdk-1.1.1-linux-x64（+ .zip）
+✓ 出包成功 linux-x64 ｜ 1.0 s
+[rc=0, 1.5 s]

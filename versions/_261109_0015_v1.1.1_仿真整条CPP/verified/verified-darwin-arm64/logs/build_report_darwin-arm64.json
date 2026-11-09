@@ -1,0 +1,86 @@
+{
+ "version_str": "1.1.1",
+ "platform_str": "darwin-arm64",
+ "smoke_bool": true,
+ "smoke_dict": {
+  "ok_bool": true,
+  "checks_list": [
+   {
+    "key_str": "a.产物齐全",
+    "ok_bool": true,
+    "detail_str": "fry_sim.dylib、fry-sim-cli、FrySimDemoC"
+   },
+   {
+    "key_str": "b.导出面==头文件",
+    "ok_bool": true,
+    "detail_str": "导出 16 个 / 头文件 14 个"
+   },
+   {
+    "key_str": "c.rpath只认同目录",
+    "ok_bool": true,
+    "detail_str": "依赖：/usr/lib/libSystem.B.dylib ｜ 最低系统 macOS 13.0"
+   },
+   {
+    "key_str": "d.ctypes自报",
+    "ok_bool": true,
+    "detail_str": "版本 1.1.1 ｜ 指纹 4efa33dddddcd032 ｜ api 2 ｜ macos-arm64 | clang 21.1.0  | -ffp-contract=off -fno-fast-math, static C++ runtime"
+   },
+   {
+    "key_str": "e.cli version",
+    "ok_bool": true,
+    "detail_str": "fry_sim SDK 1.1.1"
+   },
+   {
+    "key_str": "f.golden逐位",
+    "ok_bool": true,
+    "detail_str": "✓ selftest: 18 次运行，9 个用例，失败 0 ｜ 指纹 4efa33dddddcd032 ｜ macos-arm64 | clang 21.1.0  | -ffp-contract=off -fno-fast-math, static C++ runtime"
+   },
+   {
+    "key_str": "g.纯C示例",
+    "ok_bool": true,
+    "detail_str": "✓ gaussian3d 脉冲 → [0 0.25 0.5 0.25 0]"
+   },
+   {
+    "key_str": "h.Python示例",
+    "ok_bool": true,
+    "detail_str": "✓ gaussian3d 脉冲 → [0.0, 0.25, 0.5, 0.25, 0.0]"
+   }
+  ],
+  "probe_dict": {
+   "version": "1.1.1",
+   "fingerprint": "4efa33dddddcd03237d9d3ee2067bf0a8b1a9112933bf4a99241b30eee4a4a0a",
+   "build_info": "macos-arm64 | clang 21.1.0  | -ffp-contract=off -fno-fast-math, static C++ runtime",
+   "core": "fry_sim 1.2.0",
+   "api": 2,
+   "ok_bool": true
+  },
+  "selftest_text_str": "✓ folder_ball                  run_jobs             threads=1 跨平台（答案来自 win32-x64）：像素差 0 个通道（最大 0）、法线差 4 个分量（最大 4.42e-18），位置/面/顶点色逐个相同\n✓ folder_ball                  run_jobs             threads=3 跨平台（答案来自 win32-x64）：像素差 0 个通道（最大 0）、法线差 4 个分量（最大 4.42e-18），位置/面/顶点色逐个相同\n✓ gauss_a_long_kernel          gaussian3d           threads=1 逐位相同\n✓ gauss_a_long_kernel          gaussian3d           threads=3 逐位相同\n✓ gauss_b_skip_axis            gaussian3d           threads=1 逐位相同\n✓ gauss_b_skip_axis            gaussian3d           threads=3 逐位相同\n✓ gauss_c_tiny                 gaussian3d           threads=1 逐位相同\n✓ gauss_c_tiny                 gaussian3d           threads=3 逐位相同\n✓ normal_fields_axes012_incl   normal_fields        threads=1 逐位相同\n✓ normal_fields_axes012_incl   normal_fields        threads=3 逐位相同\n✓ normal_fields_axes201_excl   normal_fields        threads=1 逐位相同\n✓ normal_fields_axes201_excl   normal_fields        threads=3 逐位相同\n✓ normal_sample_fold_seed1     normal_sample_fold   threads=1 逐位相同\n✓ normal_sample_fold_seed1     normal_sample_fold   threads=4 逐位相同\n✓ normal_sample_fold_seed2     normal_sample_fold   threads=1 逐位相同\n✓ normal_sample_fold_seed2     normal_sample_fold   threads=4 逐位相同\n✓ ray_columns_fold_aniso       ray_columns_fold     threads=1 逐位相同\n✓ ray_columns_fold_aniso       ray_columns_fold     threads=3 逐位相同\n✓ selftest: 18 次运行，9 个用例，失败 0 ｜ 指纹 4efa33dddddcd032 ｜ macos-arm64 | clang 21.1.0  | -ffp-contract=off -fno-fast-math, static C++ runtime",
+  "lib_inspect_dict": {
+   "format_str": "Mach-O",
+   "machine_str": "arm64",
+   "needed_list": [
+    "/usr/lib/libSystem.B.dylib"
+   ],
+   "min_os_str": "macOS 13.0",
+   "export_count_int": 16,
+   "size_int": 1031504,
+   "sha256_str": "57a51f834908d66fe5619211a5737f147a84a7e3464f4ca76e754cb9f738c053"
+  }
+ },
+ "origin_dict": {
+  "target_str": "darwin-arm64",
+  "version_str": "1.1.1",
+  "zig_triple_str": "aarch64-macos-none",
+  "origin_str": "zig 0.16.0 交叉编译（宿主 win32-x64）-target aarch64-macos-none",
+  "algorithm_fingerprint_str": "4efa33dddddcd03237d9d3ee2067bf0a8b1a9112933bf4a99241b30eee4a4a0a",
+  "built_at_str": "2026-11-02T19:47:58-0800",
+  "files_dict": {
+   "fry-sim-cli": "421404c3a54d7d1cdefdee5a9a94e5c47338da058e47da1df581961760c85b3e",
+   "fry_sim.dylib": "57a51f834908d66fe5619211a5737f147a84a7e3464f4ca76e754cb9f738c053",
+   "FrySimDemoC": "5503c096309b3750286a6858d734e6939a1af089eba14febac240634065ef994"
+  }
+ },
+ "bin_dir_str": "/Users/runner/work/fry_p_3d_rip_261108_github_simulation_build/fry_p_3d_rip_261108_github_simulation_build/_ci_out/_work_darwin-arm64/fry_sim_target_kit-1.1.1-darwin-arm64/prebuilt",
+ "total_s_float": 1.1,
+ "package_str": "/Users/runner/work/fry_p_3d_rip_261108_github_simulation_build/fry_p_3d_rip_261108_github_simulation_build/_ci_out/_work_darwin-arm64/fry_sim_target_kit-1.1.1-darwin-arm64/out/package/fry_sim_sdk-1.1.1-darwin-arm64"
+}

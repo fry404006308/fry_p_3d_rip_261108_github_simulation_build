@@ -1,0 +1,1 @@
+9122e501bcb067dd0a6045371bfd6b099c9f9aee71c3cea92a5185b5d7a880e7  fry_sim_sdk-1.1.1-win32-x64.zip

@@ -13,8 +13,17 @@
     "darwin-arm64": "29f20e6f3b3e3c043c55967ce37fdada486fc93be3a1c94ebd95622fd60bf15a",
     "darwin-x64": "20c7edcf780c0b7396f1cb8b89dbd2d1c56bfb162a191618eeafe7c04e3a2919"
    },
-   "status_str": "staged",
-   "staged_at_str": "2026-11-09T08:15:50+0000"
+   "status_str": "verified",
+   "staged_at_str": "2026-11-09T08:15:50+0000",
+   "run_id_str": "42585341525",
+   "verified_at_str": "2026-11-09T00:29:38-0800",
+   "platforms_dict": {
+    "win32-x64": true,
+    "linux-x64": true,
+    "linux-arm64": true,
+    "darwin-arm64": true,
+    "darwin-x64": true
+   }
   }
  ]
 }

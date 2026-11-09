@@ -1,0 +1,1 @@
+0cdb42048d7294748d45c7b3d5171dc623424a63e408f94bb34ce36e23d4c4a1  fry_sim_sdk-1.1.1-darwin-x64.zip

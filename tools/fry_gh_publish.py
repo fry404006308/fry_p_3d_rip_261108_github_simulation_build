@@ -253,6 +253,31 @@ def find_run(sha: str, since: float, timeout_s: int = 180) -> str:
     raise SystemExit("✗ 触发后 %d s 还没看到对应的 CI 运行（网页 Actions 页看看）" % timeout_s)
 
 
+def download_artifacts(rid: str, dst: Path, timeout_s: int = 300, tries: int = 3) -> List[str]:
+    """★461 逐个 artifact 下载，每个有超时 + 重试（实测整包 `gh run download` 会卡在半路、不报错也不退出）。"""
+    r = run(["gh", "api", "repos/{owner}/{repo}/actions/runs/%s/artifacts" % rid, "--jq", ".artifacts[].name"], capture=True)
+    names = [n.strip() for n in (r.stdout or "").splitlines() if n.strip()]
+    if not names:
+        raise SystemExit("✗ CI 运行 %s 没有 artifact" % rid)
+    for name in names:
+        for k in range(1, tries + 1):
+            part = dst / name
+            if part.exists():
+                shutil.rmtree(part)
+            try:
+                p = subprocess.run(["gh", "run", "download", rid, "-n", name, "-D", str(part)], cwd=str(REPO),
+                                   capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=timeout_s)
+                if p.returncode == 0 and any(part.rglob("*")):
+                    say("  ✓ 下载 %s" % name)
+                    break
+                say("  ⚠ 下载 %s 第 %d 次失败：%s" % (name, k, (p.stdout + p.stderr).strip()[-300:]))
+            except subprocess.TimeoutExpired:
+                say("  ⚠ 下载 %s 第 %d 次超时（%d s）" % (name, k, timeout_s))
+        else:
+            raise SystemExit("✗ artifact %s 下载 %d 次都没成功" % (name, tries))
+    return names
+
+
 def cmd_ci(ns, vname: str) -> str:
     sha = git_head(REPO)
     t0 = time.time()
@@ -263,7 +288,7 @@ def cmd_ci(ns, vname: str) -> str:
     dst = VERSIONS / vname / "verified"
     if dst.exists():
         shutil.rmtree(dst)
-    run(["gh", "run", "download", rid, "-D", str(dst)])
+    download_artifacts(rid, dst)
     (dst / "run_id.txt").write_text(rid + "\n", encoding="utf-8", newline="\n")
     view = run(["gh", "run", "view", rid, "--json", "conclusion,url,jobs"], capture=True, check=False)
     (dst / "run_view.json").write_text(view.stdout or "{}", encoding="utf-8", newline="\n")

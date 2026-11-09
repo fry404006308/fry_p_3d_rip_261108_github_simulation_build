@@ -1,0 +1,41 @@
+
+$ D:\a\fry_p_3d_rip_261108_github_simulation_build\fry_p_3d_rip_261108_github_simulation_build\_ci_out\_work_win32-x64\fry_sim_sdk-1.1.1-win32-x64\bin\fry-sim-cli.exe version
+fry_sim SDK 1.1.1
+core        fry_sim 1.2.0
+api_version 2
+fingerprint 4efa33dddddcd03237d9d3ee2067bf0a8b1a9112933bf4a99241b30eee4a4a0a
+build       windows-x64 | MSVC 195035728 | /fp:precise, /MT
+[rc=0, 0.0 s]
+
+$ D:\a\fry_p_3d_rip_261108_github_simulation_build\fry_p_3d_rip_261108_github_simulation_build\_ci_out\_work_win32-x64\fry_sim_sdk-1.1.1-win32-x64\bin\fry-sim-cli.exe selftest --golden D:\a\fry_p_3d_rip_261108_github_simulation_build\fry_p_3d_rip_261108_github_simulation_build\_ci_out\_work_win32-x64\fry_sim_sdk-1.1.1-win32-x64\golden
+✓ folder_ball                  run_jobs             threads=1 逐位相同
+✓ folder_ball                  run_jobs             threads=3 逐位相同
+✓ gauss_a_long_kernel          gaussian3d           threads=1 逐位相同
+✓ gauss_a_long_kernel          gaussian3d           threads=3 逐位相同
+✓ gauss_b_skip_axis            gaussian3d           threads=1 逐位相同
+✓ gauss_b_skip_axis            gaussian3d           threads=3 逐位相同
+✓ gauss_c_tiny                 gaussian3d           threads=1 逐位相同
+✓ gauss_c_tiny                 gaussian3d           threads=3 逐位相同
+✓ normal_fields_axes012_incl   normal_fields        threads=1 逐位相同
+✓ normal_fields_axes012_incl   normal_fields        threads=3 逐位相同
+✓ normal_fields_axes201_excl   normal_fields        threads=1 逐位相同
+✓ normal_fields_axes201_excl   normal_fields        threads=3 逐位相同
+✓ normal_sample_fold_seed1     normal_sample_fold   threads=1 逐位相同
+✓ normal_sample_fold_seed1     normal_sample_fold   threads=4 逐位相同
+✓ normal_sample_fold_seed2     normal_sample_fold   threads=1 逐位相同
+✓ normal_sample_fold_seed2     normal_sample_fold   threads=4 逐位相同
+✓ ray_columns_fold_aniso       ray_columns_fold     threads=1 逐位相同
+✓ ray_columns_fold_aniso       ray_columns_fold     threads=3 逐位相同
+✓ selftest: 18 次运行，9 个用例，失败 0 ｜ 指纹 4efa33dddddcd032 ｜ windows-x64 | MSVC 195035728 | /fp:precise, /MT
+[rc=0, 1.0 s]
+
+$ D:\a\fry_p_3d_rip_261108_github_simulation_build\fry_p_3d_rip_261108_github_simulation_build\_ci_out\_work_win32-x64\fry_sim_sdk-1.1.1-win32-x64\bin\FrySimDemoC.exe
+fry_sim SDK 1.1.1 ｜ api 2 ｜ core fry_sim 1.2.0
+fingerprint 4efa33dddddcd032 ｜ windows-x64 | MSVC 195035728 | /fp:precise, /MT
+✓ gaussian3d 脉冲 → [0 0.25 0.5 0.25 0]
+[rc=0, 0.0 s]
+
+$ C:\hostedtoolcache\windows\Python\3.11.9\x64\python.exe D:\a\fry_p_3d_rip_261108_github_simulation_build\fry_p_3d_rip_261108_github_simulation_build\_ci_out\_work_win32-x64\fry_sim_sdk-1.1.1-win32-x64\examples\python\fry_sim_demo.py D:\a\fry_p_3d_rip_261108_github_simulation_build\fry_p_3d_rip_261108_github_simulation_build\_ci_out\_work_win32-x64\fry_sim_sdk-1.1.1-win32-x64\bin\fry_sim.dll
+fry_sim SDK 1.1.1 ｜ api 2 ｜ windows-x64 | MSVC 195035728 | /fp:precise, /MT
+✓ gaussian3d 脉冲 → [0.0, 0.25, 0.5, 0.25, 0.0]
+[rc=0, 0.1 s]
