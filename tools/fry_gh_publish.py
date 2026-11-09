@@ -395,6 +395,48 @@ def cmd_deliver(ns, vname: str) -> Path:
     return dst
 
 
+SIM_LIB_DICT = {"win32-x64": "fry_sim.dll", "linux-x64": "fry_sim.so", "linux-arm64": "fry_sim.so",
+                "darwin-arm64": "fry_sim.dylib", "darwin-x64": "fry_sim.dylib"}
+
+
+def cmd_deliver_algo(ns, vname: str, dst: Path) -> Dict[str, Any]:
+    """★461 交付件 → 算法仓（调打包仓自己的交付脚本，闸都在那边；本函数只挑「要交付哪些」）。
+    加网：tools/fry_deliver_verified.py（Linux / macOS → HS200 变体目录；Windows 由打包仓 fry_release 本机交付）；
+    仿真：tools/fry_deliver.py --package …（只交付「算法仓里还没有 / 库不一样」的平台：同一个库重交只会改写 sdk_info 的时间）。"""
+    algo = Path(ns.deliver_algo).resolve()
+    src = Path(ns.source_repo or (REPO.parent / PRODUCT["source_repo_name_str"])).resolve()
+    if PRODUCT["product_str"] == "halftone":
+        argv = [sys.executable, "-X", "utf8", str(src / "tools" / "fry_deliver_verified.py"), "--algo-repo", str(algo),
+                "--verified-dir", str(dst), "--result-json", str(dst / "deliver_algo_result.json")]
+    else:
+        pkgs = []
+        for t, lib in SIM_LIB_DICT.items():
+            z = dst / t / ("fry_sim_sdk-%s-%s.zip" % (json.loads((dst / "manifest.json").read_text(encoding="utf-8"))["version_str"], t))
+            if not z.is_file():
+                continue
+            out = dst / t / "pkg"
+            if out.exists():
+                shutil.rmtree(out)
+            with zipfile.ZipFile(z) as zf:
+                zf.extractall(out)
+            pkg = next(p for p in out.iterdir() if p.is_dir())
+            new_sha = json.loads((pkg / "sdk_info.json").read_text(encoding="utf-8"))["library_sha256_str"]
+            cur = algo / "rip_components" / "fry_kernel" / "_bin" / "fry_sim" / t / lib
+            if cur.is_file() and sha256_file(cur) == new_sha:
+                say("  · %s 算法仓里已是同一个库（%s…），不重交" % (t, new_sha[:16]))
+                continue
+            pkgs += ["--package", str(pkg)]
+        if not pkgs:
+            say("✓ 算法仓里各平台已是这一版的库，无需交付")
+            return {"ok_bool": True, "delivered_list": []}
+        argv = [sys.executable, "-X", "utf8", str(src / "tools" / "fry_deliver.py"), "--algo-repo", str(algo)] + pkgs + \
+               ["--result-json", str(dst / "deliver_algo_result.json")]
+    r = run(argv, cwd=src, check=False)
+    ok = r.returncode == 0
+    say("✓ 已交付进算法仓 %s" % algo if ok else "✗ 交付进算法仓失败（rc=%d）" % r.returncode)
+    return {"ok_bool": ok, "argv_list": argv}
+
+
 def cmd_status(ns) -> None:
     h = load_history()
     say("%s ｜ %d 个版本目录" % (PRODUCT["title_str"], len(h["versions_list"])))
@@ -418,12 +460,19 @@ def main(argv=None) -> int:
     ap.add_argument("--no-release", action="store_true", help="all 时跳过 release")
     ap.add_argument("--keep-release", action="store_true", help="release 下载核对后不删除")
     ap.add_argument("--no-push", action="store_true")
+    ap.add_argument("--deliver-algo", default="", help="★461 deliver 之后再交付进算法仓（给算法仓目录；界面 HS500 默认开）")
     ap.add_argument("--result-json", default="")
     ns = ap.parse_args(argv)
     os.chdir(str(REPO))
     result: Dict[str, Any] = {"cmd_str": ns.cmd}
     if ns.cmd == "status":
         cmd_status(ns)
+        if ns.result_json:
+            h = load_history()
+            Path(ns.result_json).write_text(json.dumps({
+                "ok_bool": True, "cmd_str": "status", "message_str": "%s：%d 个版本目录" % (PRODUCT["title_str"], len(h["versions_list"])),
+                "output_path_str": str(VERSIONS), "key_output_dict": {"history_list": h["versions_list"]}},
+                ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
         return 0
     if ns.cmd in ("all", "stage"):
         vname = cmd_stage(ns)
@@ -440,8 +489,19 @@ def main(argv=None) -> int:
     if ok and ((ns.cmd == "all" and not ns.no_release) or ns.cmd == "release"):
         cmd_release(ns, vname)
     if ok and ns.cmd in ("all", "deliver"):
-        result["deliver_dir_str"] = str(cmd_deliver(ns, vname))
+        dst = cmd_deliver(ns, vname)
+        result["deliver_dir_str"] = str(dst)
+        if ns.deliver_algo:
+            result["deliver_algo_dict"] = cmd_deliver_algo(ns, vname, dst)
+            ok = ok and result["deliver_algo_dict"]["ok_bool"]
     result["ok_bool"] = ok
+    # 界面子进程桥（算法仓 TR100 命令模式）读这三个键
+    rows = result.get("record_dict", {}).get("rows_list", [])
+    result["message_str"] = "%s v%s：%s" % (PRODUCT["title_str"], vname, "、".join(("✓" if r["ok_bool"] else "✗") + r["target_str"] for r in rows) or ns.cmd)
+    result["output_path_str"] = str(VERSIONS / vname)
+    result["key_output_dict"] = {"version_dir_str": vname, "verified_platforms_list": [r["target_str"] for r in rows if r["ok_bool"]],
+                                 "failed_platforms_list": [r["target_str"] for r in rows if not r["ok_bool"]],
+                                 "run_id_str": result.get("run_id_str", ""), "deliver_dir_str": result.get("deliver_dir_str", "")}
     if ns.result_json:
         Path(ns.result_json).write_text(json.dumps(result, ensure_ascii=False, indent=1, default=str) + "\n", encoding="utf-8")
     return 0 if ok else 1
