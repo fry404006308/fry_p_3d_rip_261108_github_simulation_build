@@ -1,0 +1,97 @@
+# ★461 多平台真机验收：一个版本目录（versions/<目录>/）里的预编二进制，在 GitHub 的 Linux / macOS / Windows 机器上真跑 golden。
+#   本仓只放二进制 + 验收脚本（不放算法源码）；结论（verdict / summary）和验收通过的交付件以 artifact 形式带回本机。
+#   触发：tools/fry_gh_publish.py 推送后用 `gh workflow run` 触发；也可以在网页 Actions → fry_verify → Run workflow 手动跑。
+name: fry_verify
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_dir:
+        description: "versions/ 下的版本目录名（例如 _261109_0130_v0.2.0_水转印加网）"
+        required: true
+        type: string
+
+concurrency:
+  group: fry-verify-${{ inputs.version_dir }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v5
+      - id: m
+        name: 按 manifest 登记的平台生成矩阵
+        env:
+          VDIR: ${{ inputs.version_dir }}
+        run: |
+          python3 - <<'EOF'
+          import json, os
+          runner = {"linux-x64": "ubuntu-22.04", "linux-arm64": "ubuntu-24.04-arm", "darwin-arm64": "macos-15",
+                    "darwin-x64": "macos-15-intel", "win32-x64": "windows-2022"}
+          man = json.load(open(os.path.join("versions", os.environ["VDIR"], "manifest.json"), encoding="utf-8"))
+          inc = [{"target": t, "runner": runner[t]} for t in man["targets_list"]]
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
+              f.write("matrix=" + json.dumps({"include": inc}) + "\n")
+          print(inc)
+          EOF
+
+  verify:
+    needs: plan
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - name: 工具（zstd / nm）
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          if ! command -v zstd >/dev/null; then
+            if [ "$RUNNER_OS" = "macOS" ]; then brew install zstd; else sudo apt-get update && sudo apt-get install -y zstd; fi
+          fi
+          command -v nm && command -v zstd
+      - name: 验收 ${{ matrix.target }}
+        shell: bash
+        env:
+          PYTHONUTF8: "1"
+          PYTHONIOENCODING: "utf-8"
+        run: python ci/fry_ci_target.py --version-dir "versions/${{ inputs.version_dir }}" --target "${{ matrix.target }}" --out "_ci_out/${{ matrix.target }}"
+      - uses: actions/upload-artifact@v5
+        if: always()
+        with:
+          name: verified-${{ matrix.target }}
+          path: _ci_out/${{ matrix.target }}
+          if-no-files-found: error
+          retention-days: 30
+
+  summary:
+    needs: verify
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/download-artifact@v5
+        with:
+          pattern: verified-*
+          path: _ci_all
+      - name: 汇总（每个登记的平台都必须通过）
+        env:
+          PYTHONUTF8: "1"
+        run: python3 ci/fry_ci_summary.py --version-dir "versions/${{ inputs.version_dir }}" --verdicts _ci_all --out _ci_all/summary.json
+      - uses: actions/upload-artifact@v5
+        if: always()
+        with:
+          name: verified-summary
+          path: _ci_all/summary.json
+          retention-days: 30

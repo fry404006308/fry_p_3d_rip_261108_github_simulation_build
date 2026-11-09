@@ -1,0 +1,20 @@
+{
+ "schema_str": "fry-gh-history/1",
+ "product_str": "sim",
+ "versions_list": [
+  {
+   "dir_str": "_261109_0015_v1.1.1_仿真整条CPP",
+   "version_str": "1.1.1",
+   "algorithm_fingerprint_str": "4efa33dddddcd03237d9d3ee2067bf0a8b1a9112933bf4a99241b30eee4a4a0a",
+   "inputs_sha256_dict": {
+    "win32-x64": "9122e501bcb067dd0a6045371bfd6b099c9f9aee71c3cea92a5185b5d7a880e7",
+    "linux-x64": "84048049efd9992c04ad0b966013af125ecc045f2535e5341627f3423f2c7064",
+    "linux-arm64": "65531df870e934d3d2387cab0a1d6e414322cc227ae706264e39c9e65260908e",
+    "darwin-arm64": "29f20e6f3b3e3c043c55967ce37fdada486fc93be3a1c94ebd95622fd60bf15a",
+    "darwin-x64": "20c7edcf780c0b7396f1cb8b89dbd2d1c56bfb162a191618eeafe7c04e3a2919"
+   },
+   "status_str": "staged",
+   "staged_at_str": "2026-11-09T08:15:50+0000"
+  }
+ ]
+}

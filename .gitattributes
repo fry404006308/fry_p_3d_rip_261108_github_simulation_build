@@ -1,0 +1,10 @@
+# ★461 文本一律 LF（CI 在 Linux / macOS 上跑脚本）；压缩包与二进制原样
+* text=auto eol=lf
+*.bat text eol=crlf
+*.zip binary
+*.gz binary
+*.zst binary
+*.dll binary
+*.so binary
+*.dylib binary
+*.exe binary

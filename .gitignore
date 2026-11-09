@@ -1,0 +1,7 @@
+_ci_out/
+_ci_all/
+_work_*/
+_logs/
+__pycache__/
+*.pyc
+.pytest_cache/
