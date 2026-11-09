@@ -28,7 +28,7 @@
    "checks_int": 13,
    "failed_list": [],
    "deliverable_dict": {
-    "fry_sim_sdk-1.1.1-linux-x64.zip": "4de9766183b7e4db5c9bd91107467e3fa481dab37668cfb511358919c7a220a5"
+    "fry_sim_sdk-1.1.1-linux-x64.zip": "ca48d07bb27e54644b487e8245d792965db2d7102c3b4af3ffc3157b5fc661bf"
    },
    "seconds_float": 1.6
   },
@@ -40,7 +40,7 @@
    "checks_int": 13,
    "failed_list": [],
    "deliverable_dict": {
-    "fry_sim_sdk-1.1.1-linux-arm64.zip": "f4f73466f7c1d16065cf21d3c56b5347928486ac55ae6fdf0e0e0962bad4fde5"
+    "fry_sim_sdk-1.1.1-linux-arm64.zip": "b3e42da93195c7faf9da1b8fc3fd3c82f7cf2f154d40523b297916d62a108959"
    },
    "seconds_float": 1.2
   },
@@ -52,7 +52,7 @@
    "checks_int": 13,
    "failed_list": [],
    "deliverable_dict": {
-    "fry_sim_sdk-1.1.1-darwin-arm64.zip": "b1bab7a872e950313eac5b6396d7d00c87a1cc261e0513072330afbdf69f4b37"
+    "fry_sim_sdk-1.1.1-darwin-arm64.zip": "668c4a5413629bd1c2b5ba4df7c01a72a14896fe0a699a68331ae11722a4b340"
    },
    "seconds_float": 2.2
   },
@@ -64,11 +64,11 @@
    "checks_int": 13,
    "failed_list": [],
    "deliverable_dict": {
-    "fry_sim_sdk-1.1.1-darwin-x64.zip": "0cdb42048d7294748d45c7b3d5171dc623424a63e408f94bb34ce36e23d4c4a1"
+    "fry_sim_sdk-1.1.1-darwin-x64.zip": "381ebee20b43daf74b3136a0a598731697c233543e199a2430458108e911d167"
    },
-   "seconds_float": 2.6
+   "seconds_float": 5.7
   }
  ],
- "summarized_at_str": "2026-11-09T08:22:01+0000",
- "run_url_str": "https://github.com/fry404006308/fry_p_3d_rip_261108_github_simulation_build/actions/runs/42585341525"
+ "summarized_at_str": "2026-11-09T09:56:54+0000",
+ "run_url_str": "https://github.com/fry404006308/fry_p_3d_rip_261108_github_simulation_build/actions/runs/42597133179"
 }

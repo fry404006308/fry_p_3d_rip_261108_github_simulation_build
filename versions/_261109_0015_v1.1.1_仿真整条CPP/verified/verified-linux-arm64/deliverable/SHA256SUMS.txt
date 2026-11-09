@@ -1,1 +1,1 @@
-f4f73466f7c1d16065cf21d3c56b5347928486ac55ae6fdf0e0e0962bad4fde5  fry_sim_sdk-1.1.1-linux-arm64.zip
+b3e42da93195c7faf9da1b8fc3fd3c82f7cf2f154d40523b297916d62a108959  fry_sim_sdk-1.1.1-linux-arm64.zip

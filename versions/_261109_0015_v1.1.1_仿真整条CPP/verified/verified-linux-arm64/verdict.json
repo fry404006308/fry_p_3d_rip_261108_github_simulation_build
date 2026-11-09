@@ -9,11 +9,11 @@
   "platform_str": "Linux-7.0.0-1017-azure-aarch64-with-glibc2.39",
   "machine_str": "aarch64",
   "python_str": "3.11.18",
-  "runner_str": "GitHub Actions 1000000019",
+  "runner_str": "GitHub Actions 1000000031",
   "image_str": "ubuntu24-arm64 20261101.172.1",
   "glibc_str": "glibc 2.39"
  },
- "started_at_str": "2026-11-09T08:21:42+0000",
+ "started_at_str": "2026-11-09T09:56:21+0000",
  "algorithm_fingerprint_str": "4efa33dddddcd03237d9d3ee2067bf0a8b1a9112933bf4a99241b30eee4a4a0a",
  "checks_list": [
   {
@@ -85,6 +85,6 @@
  "ok_bool": true,
  "seconds_float": 1.2,
  "deliverable_dict": {
-  "fry_sim_sdk-1.1.1-linux-arm64.zip": "f4f73466f7c1d16065cf21d3c56b5347928486ac55ae6fdf0e0e0962bad4fde5"
+  "fry_sim_sdk-1.1.1-linux-arm64.zip": "b3e42da93195c7faf9da1b8fc3fd3c82f7cf2f154d40523b297916d62a108959"
  }
 }

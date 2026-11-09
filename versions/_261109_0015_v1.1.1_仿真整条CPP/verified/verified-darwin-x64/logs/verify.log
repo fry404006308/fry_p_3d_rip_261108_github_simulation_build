@@ -15,5 +15,5 @@ $ sh run_on_target.sh
   ✓ g.纯C示例                 ✓ gaussian3d 脉冲 → [0 0.25 0.5 0.25 0]
   ✓ h.Python示例             ✓ gaussian3d 脉冲 → [0.0, 0.25, 0.5, 0.25, 0.0]
   ③ 打包 → out/package/fry_sim_sdk-1.1.1-darwin-x64（+ .zip）
-✓ 出包成功 darwin-x64 ｜ 1.4 s
-[rc=0, 2.3 s]
+✓ 出包成功 darwin-x64 ｜ 3.2 s
+[rc=0, 5.2 s]

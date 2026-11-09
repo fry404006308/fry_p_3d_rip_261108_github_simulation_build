@@ -81,6 +81,6 @@
   }
  },
  "bin_dir_str": "/Users/runner/work/fry_p_3d_rip_261108_github_simulation_build/fry_p_3d_rip_261108_github_simulation_build/_ci_out/_work_darwin-arm64/fry_sim_target_kit-1.1.1-darwin-arm64/prebuilt",
- "total_s_float": 1.1,
+ "total_s_float": 1.3,
  "package_str": "/Users/runner/work/fry_p_3d_rip_261108_github_simulation_build/fry_p_3d_rip_261108_github_simulation_build/_ci_out/_work_darwin-arm64/fry_sim_target_kit-1.1.1-darwin-arm64/out/package/fry_sim_sdk-1.1.1-darwin-arm64"
 }

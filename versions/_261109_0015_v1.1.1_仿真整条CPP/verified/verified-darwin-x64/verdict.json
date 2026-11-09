@@ -9,11 +9,11 @@
   "platform_str": "macOS-15.7.9-x86_64-i386-64bit",
   "machine_str": "x86_64",
   "python_str": "3.11.9",
-  "runner_str": "GitHub Actions 1000000018",
+  "runner_str": "GitHub Actions 1000000032",
   "image_str": "macos15 20260824.0482.1",
   "macos_str": "15.7.9"
  },
- "started_at_str": "2026-11-09T08:21:43+0000",
+ "started_at_str": "2026-11-09T09:56:21+0000",
  "algorithm_fingerprint_str": "4efa33dddddcd03237d9d3ee2067bf0a8b1a9112933bf4a99241b30eee4a4a0a",
  "checks_list": [
   {
@@ -83,8 +83,8 @@
   }
  ],
  "ok_bool": true,
- "seconds_float": 2.6,
+ "seconds_float": 5.7,
  "deliverable_dict": {
-  "fry_sim_sdk-1.1.1-darwin-x64.zip": "0cdb42048d7294748d45c7b3d5171dc623424a63e408f94bb34ce36e23d4c4a1"
+  "fry_sim_sdk-1.1.1-darwin-x64.zip": "381ebee20b43daf74b3136a0a598731697c233543e199a2430458108e911d167"
  }
 }
